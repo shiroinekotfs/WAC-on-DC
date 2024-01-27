@@ -1882,7 +1882,7 @@ function Enable-WACPSRemoting {
         Stop-Service -Name WinRM -Force -Verbose
         Set-WSManQuickConfig -Force -SkipNetworkProfileCheck
         Restart-Service -Name WinRM -Force -Verbose
-
+        Set-NetFirewallRule -Name "WINRM-HTTP-In-TCP-PUBLIC" -RemoteAddress Any
         Write-Log -Level INFO -ExitCode 0 -Message "Enable-WACPSRemoting: Successfully configured PowerShell Remoting."
         ExitWithErrorCode 0
     }
@@ -3010,7 +3010,6 @@ function Register-WACLocalCredSSP {
             RoleDefinitions      = @{
                 $userName                             = @{RoleCapabilities = $ConstCredSspRoleName }
                 $networkService.Value                 = @{RoleCapabilities = $ConstCredSspRoleName }
-                "$machineName\$ConstCredSspGroupName" = @{RoleCapabilities = $ConstCredSspRoleName }
             }
             EnvironmentVariables = @{PSModulePath = "$ConstCredSspFolderPath;$($Env:PSModulePath)" }
             ExecutionPolicy      = 'AllSigned'
