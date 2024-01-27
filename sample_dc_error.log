@@ -1,0 +1,24 @@
+2024/01/27 22:23:44 Level=ERROR ExitCode=1 Message=Enable-WACPSRemoting: Failed to configure PowerShell Remoting. Error: Access is denied. 
+2024/01/27 22:23:44 Level=INFO ExitCode=0 Message=Remove-WACSelfSignedCertificates: Successfully removed self signed certificate.
+2024/01/27 22:23:46 Level=INFO ExitCode=0 Message=New-WACSelfSignedCertificate: Successfully created self signed certificate.
+2024/01/27 22:24:18 Level=INFO ExitCode=0 Message=Copy-WACTempUpdaterProcessFiles: Successfully copied Windows Admin Center Updater process files.
+2024/01/27 22:24:19 Level=INFO ExitCode=0 Message=Register-WACUpdaterScheduledTask: Successfully registered Windows Admin Center Updater scheduled task.
+2024/01/27 22:24:20 Level=INFO ExitCode=0 Message=Unregister-WACService: Successfully unregistered Windows Admin Center service.
+2024/01/27 22:24:20 Level=INFO ExitCode=0 Message=Register-WACService: Successfully registered Windows Admin Center service.
+2024/01/27 22:24:22 Level=INFO ExitCode=0 Message=Set-WACWinRmTrustedHosts: Successfully set TrustedHosts to *.
+2024/01/27 22:24:23 Level=INFO ExitCode=0 Message=Set-WACWinRmOverHttps: Successfully set WAC WinRM over HTTPS configuration.
+2024/01/27 22:24:23 Level=INFO ExitCode=0 Message=Set-WACSoftwareUpdateMode: Successfully set WAC software update mode.
+2024/01/27 22:24:24 Level=INFO ExitCode=0 Message=Set-WACTelemetryPrivacy: Successfully set WAC telemetry privacy mode.
+2024/01/27 22:24:24 Level=INFO ExitCode=0 Message=Set-WACLoginMode: Successfully set WAC login mode.
+2024/01/27 22:24:25 Level=INFO ExitCode=0 Message=Set-WACSubjectName: Successfully set WAC certificate subject name.
+2024/01/27 22:24:25 Level=INFO ExitCode=0 Message=Set-WACCertificateAcl: Unable to find machine key path for certificate. Skipping setting access control list.
+2024/01/27 22:24:26 Level=INFO ExitCode=0 Message=Set-WACHttpsPorts: Successfully set WAC HTTPS ports.
+2024/01/27 22:24:27 Level=INFO ExitCode=0 Message=Unregister-WACFirewallRule: Successfully removed WAC firewall rule.
+2024/01/27 22:24:27 Level=INFO ExitCode=0 Message=Register-WACFirewallRule: Successfully created WAC firewall rule.
+2024/01/27 22:24:28 Level=ERROR ExitCode=1 Message=Register-WACLocalCredSSP: Failed to register CredSSP session configuration.
+2024/01/27 22:24:29 Level=INFO ExitCode=0 Message=Add-WACUserSIDToSecurityDescriptor: Successfully set user SID to service secirity descriptor.
+2024/01/27 22:24:29 Level=INFO ExitCode=0 Message=Set-WACServiceSecurityDescriptor: Successfully set security descriptor.
+2024/01/27 22:24:33 Level=INFO ExitCode=0 Message=Initialize-WACDatabase: Successfully initialized database.
+2024/01/27 22:24:34 Level=INFO ExitCode=0 Message=Import-WACExistingExtensions: No previously installed extensions to import.
+2024/01/27 22:24:34 Level=INFO ExitCode=0 Message=Import-WACExistingPlugins: No previously installed plugins to import.
+2024/01/27 22:24:35 Level=INFO ExitCode=0 Message=New-WACEventLog: Successfully created Windows Admin Center event log.
