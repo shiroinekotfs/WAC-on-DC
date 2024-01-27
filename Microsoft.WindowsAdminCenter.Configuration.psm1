@@ -1878,7 +1878,11 @@ function Enable-WACPSRemoting {
 
     SetExitWithErrorCode $ExitWithErrorCode
     try {
-        Enable-PSRemoting -SkipNetworkProfileCheck -Force -ErrorAction Stop
+        #Enable-PSRemoting -SkipNetworkProfileCheck -Force -ErrorAction Stop
+        Stop-Service -Name WinRM -Force -Verbose
+        Set-WSManQuickConfig -Force -SkipNetworkProfileCheck
+        Restart-Service -Name WinRM -Force -Verbose
+        Set-NetFirewallRule -Name "WINRM-HTTP-In-TCP-PUBLIC" -RemoteAddress Any
         Write-Log -Level INFO -ExitCode 0 -Message "Enable-WACPSRemoting: Successfully configured PowerShell Remoting."
         ExitWithErrorCode 0
     }
@@ -2928,11 +2932,15 @@ function Register-WACLocalCredSSP {
             Remove-LocalGroup -Name $ConstCredSspGroupName
         }
 
-        New-LocalGroup -Name $ConstCredSspGroupName -Description $ConstCredSspGroupDescription
-        $user = [System.Security.Principal.WindowsIdentity]::GetCurrent()
-        $userName = $user.Name
-        Add-LocalGroupMember -Group $ConstCredSspGroupName -Member $userName
+        # Create new group for service sign-in
+        # Doesn't work on Domain Controller
+        #New-LocalGroup -Name $ConstCredSspGroupName -Description $ConstCredSspGroupDescription
+        #$user = [System.Security.Principal.WindowsIdentity]::GetCurrent() #.Name. Just it, bruh the bro make it complicated
+        #$userName = $user.Name
+        #Add-LocalGroupMember -Group $ConstCredSspGroupName -Member $userName
 
+        $userName = [System.Security.Principal.WindowsIdentity]::GetCurrent().Name
+        
         # 1 remove old one if exists.
         $existing = Get-PSSessionConfiguration -Name $ConstCredSspName -ErrorAction SilentlyContinue
         if ($existing) {
@@ -3002,7 +3010,6 @@ function Register-WACLocalCredSSP {
             RoleDefinitions      = @{
                 $userName                             = @{RoleCapabilities = $ConstCredSspRoleName }
                 $networkService.Value                 = @{RoleCapabilities = $ConstCredSspRoleName }
-                "$machineName\$ConstCredSspGroupName" = @{RoleCapabilities = $ConstCredSspRoleName }
             }
             EnvironmentVariables = @{PSModulePath = "$ConstCredSspFolderPath;$($Env:PSModulePath)" }
             ExecutionPolicy      = 'AllSigned'
@@ -3010,7 +3017,7 @@ function Register-WACLocalCredSSP {
 
         # 4a Create the configuration file
         New-PSSessionConfigurationFile @configuration
-        Register-PSSessionConfiguration -Name $ConstCredSspName -Path $psscPath -NoServiceRestart:$NoWinRmServiceRestart -Force -WarningAction SilentlyContinue -ErrorAction Stop
+        Register-PSSessionConfiguration -Name $ConstCredSspName -Path $psscPath -NoServiceRestart:$NoWinRmServiceRestart -Force -WarningAction SilentlyContinue -ErrorAction Stop -Verbose
 
         # 4b Enable PowerShell logging on the system
         $basePath = "HKLM:\Software\Policies\Microsoft\Windows\PowerShell\ScriptBlockLogging"
@@ -3018,7 +3025,7 @@ function Register-WACLocalCredSSP {
             $null = New-Item $basePath -Force
         }
 
-        Set-ItemProperty $basePath -Name EnableScriptBlockLogging -Value "1" -ErrorAction Stop
+        Set-ItemProperty $basePath -Name EnableScriptBlockLogging -Value "1" -ErrorAction Ignore
     }
     catch {
         Write-Error $_
