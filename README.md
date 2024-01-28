@@ -1,4 +1,6 @@
-# Windows Admin Center (Preview) on Domain Controller
+> A wannabe Microsoft MVP -> [@shiroinekotfs](https://github.com/shiroinekotfs)
+
+# Windows Admin Center on Domain Controller
 
 ![image](https://github.com/shiroinekotfs/WAC-on-DC/assets/115929530/39b27ad8-bf3b-4691-9603-4934de2d4268)
 
