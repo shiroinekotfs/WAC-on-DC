@@ -1,5 +1,7 @@
 # Windows Admin Center (Preview) on Domain Controller
 
+![image](https://github.com/shiroinekotfs/WAC-on-DC/assets/115929530/39b27ad8-bf3b-4691-9603-4934de2d4268)
+
 ## Getting started
 
 You, first, install Windows Admin Center (Preview). If you don't have, [download it here](https://www.microsoft.com/en-us/software-download/windowsinsiderpreviewserver)
