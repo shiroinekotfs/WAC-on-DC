@@ -10,7 +10,7 @@
 
 ![Alt text](image.png)
 
-As you know, we **CANNOT INSTALL Windows Admin Center** on **Domain Controller** easily. As Microsoft claimed:
+As you know, we **CANNOT INSTALL** Windows Admin Center on **Domain Controller** easily. As Microsoft claimed:
 
 ```shell
 Installing Windows Admin Center on a Domain controller is not supported. Read more about domain controller security best practices.
